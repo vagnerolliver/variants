@@ -1,0 +1,10 @@
+{% if forloop.first %}
+  <hr><h5>{{ variant.properties.property1.name }}</h5>
+  <div id="{{ variant.properties.property1.name }}">
+{% endif %}
+<label {% if variant.available_quantity > 0 and variant.available_quantity < 3 %}data-toggle="tooltip" data-placement="top" title="Existem apenas mais {{ variant.available_quantity }} em estoque!" {% elsif variant.available_quantity == 0 %} data-toggle="tooltip" data-placement="top" title="Indisponível" {% endif %} {% if variant.properties.property1.value contains  "#" %}style="background-color:{{ variant.properties.property1.value }}"{% endif %}>
+  <input type="radio" name="sku" {% if forloop.first %}checked="checked"{% endif %} value="{{ variant.sku }}" {% unless variant.available %}disabled{% endunless %}/>{{ variant.properties.property1.value }}
+</label>
+{% if forloop.last %}
+  </div>
+{% endif%}
