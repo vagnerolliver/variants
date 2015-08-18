@@ -6,5 +6,5 @@
   <input type="radio" name="sku" {% if forloop.first %}checked="checked"{% endif %} value="{{ variant.sku }}" {% unless variant.available %}disabled{% endunless %}/>{{ variant.properties.property2.value }}
 </label>
 {% if forloop.last %}
-  </div>
+  </div> 
 {% endif%}
