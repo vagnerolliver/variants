@@ -1,0 +1,37 @@
+{% variants product_id:product.id %}
+  <!-- validando os atributos preenchidos na variante-->
+  {% assign atributo1 = variant.properties.property1.value %}
+  {% assign atributo2 = variant.properties.property2.value %}
+
+  {% if atributo2 and atributo1 and atributo1.size > 0 and atributo2.size > 0 %}
+    <!-- Para produtos com o primeiro e o segundo variante  -->
+    {% include "2_atributos" %}
+  {% elsif atributo1 and atributo1.size > 0 %}
+    {% include "1_atributo__1" %}
+    <!-- Para produtos com apenas o primeiro variante  -->
+  {% elsif  atributo2 and atributo2.size > 0 %}
+    <!-- Para produtos com apenas o segundo variante -->
+    {% include "1_atributo__2" %}
+  {% else %}
+    <!-- Para produtos sem variante -->
+    <input type="hidden" id="sku" name="sku" value="{{ variant.sku }}" />
+  {% endif %}
+{% endvariants %}
+
+<script type="text/javascript">
+  var user_cat = $("input[name='first-variant']:checked").val();
+  $('.'+user_cat).show();
+  $('.first_attribute').click(function() {
+    $(".second_attribute").hide();
+    $('.'+$(this).attr("data-first-attribute")).show();
+  });
+  // Seletor de variantes
+  $('input[type="radio"]').change(function() {
+    var tmp=$(this).attr('name');
+    $('input[name="'+tmp+'"]').parent("label").removeClass("checked");
+    $(this).parent("label").toggleClass("checked", this.selected);
+  });
+  $('input[type="checkbox"]').change(function() {
+    $(this).parent("label").toggleClass("checked", this.selected);
+  });
+</script>
