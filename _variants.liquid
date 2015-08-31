@@ -3,13 +3,13 @@
   {% assign atributo1 = variant.properties.property1.value %}
   {% assign atributo2 = variant.properties.property2.value %}
 
-  {% if atributo2 and atributo1 and atributo1.size > 0 and atributo2.size > 0 %}
+  {% if atributo2 !="" and atributo1 !="" %}
     <!-- Para produtos com o primeiro e o segundo variante  -->
     {% include "2_atributos" %}
-  {% elsif atributo1 and atributo1.size > 0 %}
+  {% elsif atributo1 !="" %}
     <!-- Para produtos com apenas o primeiro variante  -->
     {% include "1_atributo__1" %}
-  {% elsif  atributo2 and atributo2.size > 0 %}
+  {% elsif atributo2 !="" %}
     <!-- Para produtos com apenas o segundo variante -->
     {% include "1_atributo__2" %}
   {% else %}
